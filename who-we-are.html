@@ -131,7 +131,7 @@ element.style {
 
 
 		</style>
-</meta></meta><link href="wp-content/plugins/elementor/assets/lib/eicons/css/elementor-icons.min.css" rel="stylesheet"/><link href="wp-content/plugins/elementor/assets/css/widget-button.min.css" rel="stylesheet"/><link href="wp-content/plugins/elementor/assets/css/widget-text-editor.min.css" rel="stylesheet"/><link href="wp-content/plugins/elementor/assets/css/widget-divider.min.css" rel="stylesheet"/><link href="wp-content/plugins/elementor/assets/css/widget-icon-box.min.css" rel="stylesheet"/><link href="wp-content/plugins/elementor/assets/css/widget-accordion.min.css" rel="stylesheet"/><link href="wp-content/plugins/elementor/assets/css/widget-tabs.min.css" rel="stylesheet"/><link href="wp-content/plugins/elementor/assets/css/widget-image-carousel.min.css" rel="stylesheet"/><link href="wp-content/plugins/elementor/assets/css/widget-slides.min.css" rel="stylesheet"/><link href="wp-content/plugins/elementor/assets/css/widget-testimonial.min.css" rel="stylesheet"/><style>
+</meta></meta><link href="wp-content/plugins/elementor/assets/lib/eicons/css/elementor-icons.min.css" rel="stylesheet"/><link href="wp-content/plugins/elementor/assets/css/widget-button.min.css" rel="stylesheet"/><link href="wp-content/plugins/elementor/assets/css/widget-text-editor.min.css" rel="stylesheet"/><link href="wp-content/plugins/elementor/assets/css/widget-icon-box.min.css" rel="stylesheet"/><link href="wp-content/plugins/elementor/assets/css/widget-accordion.min.css" rel="stylesheet"/><link href="wp-content/plugins/elementor/assets/css/widget-tabs.min.css" rel="stylesheet"/><link href="wp-content/plugins/elementor/assets/css/widget-image-carousel.min.css" rel="stylesheet"/><link href="wp-content/plugins/elementor/assets/css/widget-slides.min.css" rel="stylesheet"/><link href="wp-content/plugins/elementor/assets/css/widget-testimonial.min.css" rel="stylesheet"/><style>
 /* ══ LAYOUT ══ */
 html,body{width:100%;overflow-x:hidden;margin:0;padding:0}
 *{box-sizing:border-box}
@@ -143,7 +143,7 @@ html,body{width:100%;overflow-x:hidden;margin:0;padding:0}
 .site-main-header-inner-wrap,.site-header-row-container,
 .site-header-row-container-inner{width:100%!important;max-width:100%!important}
 
-/* ══ NAV DROPDOWN ══ */
+/* ══ NAV ══ */
 .primary-menu-container{display:flex!important;align-items:center}
 #primary-menu{display:flex!important;list-style:none;margin:0;padding:0;align-items:center;flex-wrap:nowrap}
 #primary-menu>li{position:relative}
@@ -151,9 +151,8 @@ html,body{width:100%;overflow-x:hidden;margin:0;padding:0}
 #primary-menu .sub-menu{display:none;position:absolute;top:100%;left:0;
   background:var(--global-palette3,#1A202C);min-width:220px;z-index:9999;
   list-style:none;padding:8px 0;margin:0;box-shadow:0px 2px 13px 0px rgba(0,0,0,.4)}
-#primary-menu>li:hover>.sub-menu,
-#primary-menu>li:focus-within>.sub-menu{display:block}
 #primary-menu .sub-menu li{border-bottom:1px solid rgba(255,255,255,.1)}
+#primary-menu>li:hover>.sub-menu,#primary-menu>li:focus-within>.sub-menu{display:block}
 
 /* ══ MOBILE ══ */
 #mobile-header{display:none}
@@ -161,11 +160,7 @@ html,body{width:100%;overflow-x:hidden;margin:0;padding:0}
   #mobile-header{display:block!important}
   #main-header .site-main-header-wrap{display:none!important}
 }
-@media(min-width:1025px){
-  #mobile-header{display:none!important}
-}
-#mobile-drawer.showing-popup-drawer-from-right,
-body.showing-popup-drawer-from-right #mobile-drawer{display:block!important}
+@media(min-width:1025px){#mobile-header{display:none!important}}
 
 /* ══ FOOTER ══ */
 #colophon{width:100%!important;max-width:100%!important;display:block!important}
@@ -180,44 +175,33 @@ body.showing-popup-drawer-from-right #mobile-drawer{display:block!important}
 #kt-scroll-up,#kt-scroll-up-reader{
   position:fixed!important;bottom:30px!important;right:30px!important;
   z-index:9999!important;display:none}
-#kt-scroll-up.kt-visible,#kt-scroll-up-reader.kt-visible{
-  display:inline-flex!important;align-items:center;justify-content:center}
 
 /* ══ ELEMENTOR SECTIONS ══ */
 .elementor-section-stretched{
   width:100vw!important;max-width:100vw!important;
   position:relative;left:50%!important;transform:translateX(-50%)!important}
 
-/* ══ BACKGROUND SLIDESHOW — behind content, NOT blurring it ══ */
-.kt-bg-slideshow{
-  position:absolute;inset:0;overflow:hidden;z-index:0;pointer-events:none}
-.kt-bg-slide{
-  position:absolute;inset:0;opacity:0;
-  transition:opacity 1.5s ease;
+/* ══ TRUE CSS PARALLAX (background-attachment:fixed) ══ */
+/* Preserve the fixed attachment from source — it IS defined in elementor inline CSS */
+/* We just make sure it isn't overridden */
+@media(min-width:1025px){
+  .elementor-element-ebdb1b4:not(.elementor-motion-effects-element-type-background),
+  .elementor-element-ebdb1b4>.elementor-motion-effects-container>.elementor-motion-effects-layer{
+    background-attachment:fixed!important
+  }
+}
+
+/* ══ BACKGROUND SLIDESHOW ══ */
+.kt-bg-slideshow{position:absolute;inset:0;overflow:hidden;z-index:0;pointer-events:none}
+.kt-bg-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.5s ease;
   background-size:cover;background-position:center;background-repeat:no-repeat}
 .kt-bg-slide.kt-active{opacity:1}
-/* Ensure section content sits ABOVE the slideshow */
+/* Section content always above slideshow */
 .elementor-section>[class*="elementor-container"],
 .elementor-section>.elementor-background-overlay{position:relative;z-index:1}
 
-/* ══ PARALLAX ══ */
-.elementor-motion-effects-container{
-  position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
-.elementor-motion-effects-layer{
-  position:absolute;inset:-15%;width:130%;height:130%;
-  background-size:cover;background-position:center;will-change:transform}
-
 /* ══ IMAGES ══ */
 img{max-width:100%;height:auto}
-.elementor-widget-image img{display:block}
-
-/* ══ OWL CAROUSEL TEXT FIX ══ */
-.owl-carousel .sa_hover_container{
-  padding:5% 5%;background:rgb(207,226,243);border-radius:4px}
-.owl-carousel .sa_hover_container p{margin:0 0 10px;line-height:1.7}
-.owl-carousel .owl-nav{margin-top:10px;text-align:center}
-.owl-carousel .owl-nav button{padding:5px 12px!important;margin:0 4px;
-  background:#00102e!important;color:#fff!important;border:none;cursor:pointer}
 </style></head>
 <body class="wp-singular page-template page-template-elementor_header_footer page page-id-1016 wp-custom-logo wp-embed-responsive wp-theme-kadence footer-on-bottom hide-focus-outline link-style-standard content-title-style-above content-width-normal content-style-boxed content-vertical-padding-show non-transparent-header mobile-non-transparent-header kadence-elementor-colors elementor-default elementor-template-full-width elementor-kit-15 elementor-page elementor-page-1016">
 <div class="site wp-site-blocks" id="wrapper">
@@ -794,159 +778,106 @@ const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(
 </script>
 <script>
 (function(){
-  /* ── Slideshow backgrounds (BEHIND content) ── */
+  /* Slideshow backgrounds */
   function initSlideshows(){
     document.querySelectorAll('[data-settings]').forEach(function(section){
       try{
-        var cfg = JSON.parse(section.getAttribute('data-settings')||'{}');
-        var gallery = cfg.background_slideshow_gallery;
+        var cfg=JSON.parse(section.getAttribute('data-settings')||'{}');
+        var gallery=cfg.background_slideshow_gallery;
         if(!gallery||!gallery.length) return;
-
-        // Don't double-init
         if(section.querySelector('.kt-bg-slideshow')) return;
-
-        var container = document.createElement('div');
-        container.className = 'kt-bg-slideshow';
-
-        gallery.forEach(function(img, i){
-          var slide = document.createElement('div');
-          slide.className = 'kt-bg-slide' + (i===0?' kt-active':'');
-          slide.style.backgroundImage = 'url("'+img.url+'")';
-          slide.style.transitionDuration = (cfg.background_slideshow_transition_duration||500)+'ms';
+        var container=document.createElement('div');
+        container.className='kt-bg-slideshow';
+        gallery.forEach(function(img,i){
+          var slide=document.createElement('div');
+          slide.className='kt-bg-slide'+(i===0?' kt-active':'');
+          slide.style.backgroundImage='url("'+img.url+'")';
+          slide.style.transitionDuration=(cfg.background_slideshow_transition_duration||500)+'ms';
           container.appendChild(slide);
         });
-
-        // Insert as FIRST child so it's behind everything
-        section.insertBefore(container, section.firstChild);
-
-        if(gallery.length > 1){
-          var cur = 0;
-          var slides = container.querySelectorAll('.kt-bg-slide');
-          var duration = cfg.background_slideshow_slide_duration||5000;
+        section.insertBefore(container,section.firstChild);
+        if(gallery.length>1){
+          var cur=0;
+          var slides=container.querySelectorAll('.kt-bg-slide');
+          var dur=cfg.background_slideshow_slide_duration||5000;
           setInterval(function(){
             slides[cur].classList.remove('kt-active');
-            cur = (cur+1) % slides.length;
+            cur=(cur+1)%slides.length;
             slides[cur].classList.add('kt-active');
-          }, duration);
+          },dur);
         }
       }catch(e){}
     });
   }
 
-  /* ── Parallax on scroll ── */
-  function initParallax(){
-    var layers = document.querySelectorAll('.elementor-motion-effects-layer');
-    if(!layers.length) return;
-    var ticking = false;
-    window.addEventListener('scroll', function(){
-      if(!ticking){
-        requestAnimationFrame(function(){
-          var scrollY = window.pageYOffset;
-          layers.forEach(function(layer){
-            var rect = layer.closest('section,div');
-            if(!rect) return;
-            var speed = 0.25;
-            layer.style.transform = 'translateY('+(scrollY*speed)+'px)';
-          });
-          ticking = false;
-        });
-        ticking = true;
-      }
-    },{passive:true});
-  }
-
-  /* ── Scroll to top ── */
+  /* Scroll to top */
   function initScrollTop(){
-    var btns = [
-      document.getElementById('kt-scroll-up'),
-      document.getElementById('kt-scroll-up-reader')
-    ].filter(Boolean);
-    btns.forEach(function(b){ b.style.display='none'; });
-    window.addEventListener('scroll', function(){
-      var show = window.pageYOffset > 300;
-      btns.forEach(function(b){
-        b.style.display = show ? 'inline-flex' : 'none';
-      });
+    var btns=[document.getElementById('kt-scroll-up'),
+              document.getElementById('kt-scroll-up-reader')].filter(Boolean);
+    btns.forEach(function(b){b.style.display='none';});
+    window.addEventListener('scroll',function(){
+      var show=window.pageYOffset>300;
+      btns.forEach(function(b){b.style.display=show?'inline-flex':'none';});
     },{passive:true});
     btns.forEach(function(b){
-      b.addEventListener('click', function(e){
-        e.preventDefault();
-        window.scrollTo({top:0, behavior:'smooth'});
+      b.addEventListener('click',function(e){
+        e.preventDefault();window.scrollTo({top:0,behavior:'smooth'});
       });
     });
   }
 
-  /* ── Mobile drawer ── */
+  /* Mobile drawer */
   function initMobile(){
-    var drawer = document.getElementById('mobile-drawer');
+    var drawer=document.getElementById('mobile-drawer');
     if(!drawer) return;
-    function openDrawer(){
-      drawer.classList.add('showing-popup-drawer-from-right');
-      drawer.style.display = 'block';
-      document.body.classList.add('showing-popup-drawer-from-right');
-    }
-    function closeDrawer(){
-      drawer.classList.remove('showing-popup-drawer-from-right');
-      drawer.style.display = 'none';
-      document.body.classList.remove('showing-popup-drawer-from-right');
-    }
+    function open(){drawer.classList.add('showing-popup-drawer-from-right');
+      drawer.style.display='block';document.body.classList.add('showing-popup-drawer-from-right');}
+    function close(){drawer.classList.remove('showing-popup-drawer-from-right');
+      drawer.style.display='none';document.body.classList.remove('showing-popup-drawer-from-right');}
     document.querySelectorAll('[data-toggle-target="#mobile-drawer"]').forEach(function(btn){
-      btn.addEventListener('click', function(e){
+      btn.addEventListener('click',function(e){
         e.preventDefault();
-        if(btn.classList.contains('menu-toggle-close')||btn.classList.contains('drawer-toggle')&&btn.classList.contains('menu-toggle-close')){
-          closeDrawer();
-        } else {
-          openDrawer();
-        }
+        btn.classList.contains('menu-toggle-close')?close():open();
       });
     });
     drawer.querySelectorAll('.drawer-overlay').forEach(function(ov){
-      ov.addEventListener('click', closeDrawer);
+      ov.addEventListener('click',close);
     });
-    // Mobile sub-menu toggles
     drawer.querySelectorAll('.drawer-sub-toggle').forEach(function(btn){
-      btn.addEventListener('click', function(e){
+      btn.addEventListener('click',function(e){
         e.preventDefault();
-        var target = document.querySelector(btn.getAttribute('data-toggle-target'));
-        if(target){
-          var isVisible = target.style.display === 'block';
-          target.style.display = isVisible ? 'none' : 'block';
-          btn.setAttribute('aria-expanded', !isVisible);
-        }
+        var target=document.querySelector(btn.getAttribute('data-toggle-target'));
+        if(target){var v=target.style.display==='block';
+          target.style.display=v?'none':'block';
+          btn.setAttribute('aria-expanded',!v);}
       });
     });
   }
 
-  /* ── Accordion ── */
-  document.addEventListener('click', function(e){
-    var title = e.target.closest('.elementor-accordion-title,.elementor-tab-title');
+  /* Accordion */
+  document.addEventListener('click',function(e){
+    var title=e.target.closest('.elementor-accordion-title,.elementor-tab-title');
     if(!title) return;
     e.preventDefault();
-    var item = title.closest('.elementor-accordion-item,.elementor-tab');
+    var item=title.closest('.elementor-accordion-item,.elementor-tab');
     if(!item) return;
-    var isOpen = item.classList.contains('elementor-active');
-    var parent = item.closest('.elementor-accordion,.elementor-tabs');
-    if(parent){
-      parent.querySelectorAll('.elementor-accordion-item,.elementor-tab').forEach(function(s){
-        s.classList.remove('elementor-active');
-        var c = s.querySelector('.elementor-tab-content,.elementor-accordion-content');
-        if(c) c.style.display='none';
-      });
-    }
-    if(!isOpen){
-      item.classList.add('elementor-active');
-      var c = item.querySelector('.elementor-tab-content,.elementor-accordion-content');
-      if(c) c.style.display='block';
-    }
+    var open=item.classList.contains('elementor-active');
+    var parent=item.closest('.elementor-accordion,.elementor-tabs');
+    if(parent) parent.querySelectorAll('.elementor-accordion-item,.elementor-tab').forEach(function(s){
+      s.classList.remove('elementor-active');
+      var c=s.querySelector('.elementor-tab-content,.elementor-accordion-content');
+      if(c) c.style.display='none';
+    });
+    if(!open){item.classList.add('elementor-active');
+      var c=item.querySelector('.elementor-tab-content,.elementor-accordion-content');
+      if(c) c.style.display='block';}
   });
 
-  /* ── Run ── */
   if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded', function(){
-      initSlideshows(); initParallax(); initScrollTop(); initMobile();
-    });
+    document.addEventListener('DOMContentLoaded',function(){
+      initSlideshows();initScrollTop();initMobile();});
   } else {
-    initSlideshows(); initParallax(); initScrollTop(); initMobile();
+    initSlideshows();initScrollTop();initMobile();
   }
 })();
 </script></body>
