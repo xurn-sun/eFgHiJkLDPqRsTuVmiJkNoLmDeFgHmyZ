@@ -60,37 +60,18 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 /*# sourceURL=elementor-frontend-inline-css */
 
 @media(min-width:1025px){
-
 @media(min-width:1025px){
-  /* ── Hero section bg: correct offset ── */
+  /* Hero bg correct offset */
   .elementor-9 .elementor-element.elementor-element-bd1ec04:not(.elementor-motion-effects-element-type-background),
   .elementor-9 .elementor-element.elementor-element-bd1ec04>.elementor-motion-effects-container>.elementor-motion-effects-layer{
-    background-image:url("/wp-content/uploads/2024/06/gsv-8569.jpg") !important;
     background-position:0px -102px !important;
-    background-size:cover !important;
-    background-repeat:no-repeat !important;
   }
-  /* ── Hero PNG overlay: position to right ── */
+  /* Hero PNG overlay position */
   .elementor-9 .elementor-element.elementor-element-bd1ec04>.elementor-background-overlay{
-    background-image:url("/wp-content/uploads/2022/04/1303208.png") !important;
     background-position:800px 0px !important;
     background-size:contain !important;
     background-repeat:no-repeat !important;
     opacity:0.58 !important;
-    display:block !important;
-    position:absolute !important;
-    inset:0 !important;
-    width:100% !important;
-    height:100% !important;
-  }
-  /* ── Parallax section: fixed bg ── */
-  .elementor-9 .elementor-element.elementor-element-ebdb1b4:not(.elementor-motion-effects-element-type-background),
-  .elementor-9 .elementor-element.elementor-element-ebdb1b4>.elementor-motion-effects-container>.elementor-motion-effects-layer{
-    background-image:url("/wp-content/uploads/2024/06/3325395435_769f86f199_b.jpg") !important;
-    background-attachment:fixed !important;
-    background-position:bottom center !important;
-    background-size:cover !important;
-    background-repeat:no-repeat !important;
   }
 }
 </style>
@@ -225,48 +206,53 @@ html,body{width:100%;overflow-x:hidden;margin:0;padding:0}
 
 /* ══ IMAGES ══ */
 img{max-width:100%;height:auto}
-
-/* ══ PARALLAX FIX v2 ══ */
-/* background-attachment:fixed requires NO overflow:hidden on parent */
-.elementor-element-ebdb1b4,
-.elementor-element-ebdb1b4.elementor-section-stretched {
-  overflow:visible !important;
-}
-/* Ensure the section has correct height and shows bg */
+/* ══ PARALLAX SECTION - JS-driven parallax ══ */
 .elementor-element-ebdb1b4 {
-  position:relative;
-  min-height:444px;
+  position: relative !important;
+  overflow: hidden !important;
 }
+/* The parallax bg layer - absolutely positioned, moved by JS */
+.parallax-bg-layer {
+  position: absolute !important;
+  top: -30% !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 160% !important;
+  background-image: url("/wp-content/uploads/2024/06/3325395435_769f86f199_b.jpg") !important;
+  background-size: cover !important;
+  background-position: bottom center !important;
+  background-repeat: no-repeat !important;
+  z-index: 0 !important;
+  will-change: transform;
+  pointer-events: none !important;
+}
+/* Ensure overlay and content sit above the parallax layer */
 .elementor-element-ebdb1b4 > .elementor-background-overlay {
-  position:absolute;
-  inset:0;
-  z-index:1;
-  pointer-events:none;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
 }
 .elementor-element-ebdb1b4 > .elementor-container {
-  position:relative;
-  z-index:2;
-  min-height:444px;
+  position: relative !important;
+  z-index: 2 !important;
+  min-height: 444px !important;
+}
+/* Remove the background from the section itself (moved to .parallax-bg-layer) */
+.elementor-9 .elementor-element.elementor-element-ebdb1b4:not(.elementor-motion-effects-element-type-background) {
+  background-image: none !important;
+  background-attachment: scroll !important;
 }
 
-/* ══ HERO PNG OVERLAY FIX ══ */
-/* The 1303208.png decorative overlay on hero right side */
-.elementor-element-bd1ec04 {
-  position:relative;
-  overflow:hidden;
-}
+/* ══ HERO PNG OVERLAY ══ */
+.elementor-element-bd1ec04 { position: relative; overflow: hidden; }
 .elementor-element-bd1ec04 > .elementor-background-overlay {
-  position:absolute !important;
-  inset:0 !important;
-  width:100% !important;
-  height:100% !important;
-  z-index:1 !important;
-  pointer-events:none !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
 }
-.elementor-element-bd1ec04 > .elementor-container {
-  position:relative;
-  z-index:2;
-}
+.elementor-element-bd1ec04 > .elementor-container { position:relative; z-index:2; }
 </style></head>
 <body class="home wp-singular page-template page-template-elementor_header_footer page page-id-9 wp-custom-logo wp-embed-responsive wp-theme-kadence footer-on-bottom hide-focus-outline link-style-standard content-title-style-above content-width-normal content-style-boxed content-vertical-padding-show non-transparent-header mobile-non-transparent-header kadence-elementor-colors elementor-default elementor-template-full-width elementor-kit-15 elementor-page elementor-page-9">
 <div class="site wp-site-blocks" id="wrapper">
@@ -514,7 +500,7 @@ img{max-width:100%;height:auto}
 </div>
 </div>
 </section>
-<section class="elementor-section elementor-top-section elementor-element elementor-element-ebdb1b4 elementor-section-full_width elementor-section-height-min-height elementor-section-stretched elementor-section-height-default elementor-section-items-middle" data-e-type="section" data-element_type="section" data-id="ebdb1b4" data-settings='{"stretch_section":"section-stretched","background_background":"classic"}'>
+<section class="elementor-section elementor-top-section elementor-element elementor-element-ebdb1b4 elementor-section-full_width elementor-section-height-min-height elementor-section-stretched elementor-section-height-default elementor-section-items-middle" data-e-type="section" data-element_type="section" data-id="ebdb1b4" data-settings='{"stretch_section":"section-stretched","background_background":"classic"}'><div class="parallax-bg-layer"></div>
 <div class="elementor-background-overlay"></div>
 <div class="elementor-container elementor-column-gap-no">
 <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-fb525b8" data-e-type="column" data-element_type="column" data-id="fb525b8">
@@ -1025,11 +1011,39 @@ const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(
       if(c) c.style.display='block';}
   });
 
+
+  /* ── JS Parallax for stretched sections ── */
+  function initParallax() {
+    var layer = document.querySelector('.parallax-bg-layer');
+    if (!layer) return;
+    var section = layer.closest('section') || layer.parentElement;
+    
+    function updateParallax() {
+      var rect = section.getBoundingClientRect();
+      var windowH = window.innerHeight;
+      
+      // Only animate when section is in viewport
+      if (rect.bottom < 0 || rect.top > windowH) return;
+      
+      // Calculate parallax offset
+      // When section enters from bottom: positive offset (image shows bottom)
+      // When section exits at top: negative offset (image shows top)
+      var progress = (windowH - rect.top) / (windowH + rect.height);
+      // progress goes 0→1 as section scrolls through viewport
+      var offset = (progress - 0.5) * 120; // 120px total travel
+      
+      layer.style.transform = 'translateY(' + offset + 'px)';
+    }
+    
+    window.addEventListener('scroll', updateParallax, {passive: true});
+    updateParallax(); // Run once on load
+  }
+
   if(document.readyState==='loading'){
     document.addEventListener('DOMContentLoaded',function(){
-      initSlideshows();initScrollTop();initMobile();});
+      initSlideshows();initScrollTop();initMobile();initParallax();});
   } else {
-    initSlideshows();initScrollTop();initMobile();
+    initSlideshows();initScrollTop();initMobile();initParallax();
   }
 })();
 </script></body>
